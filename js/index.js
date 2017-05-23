@@ -1,4 +1,5 @@
 var answer, lastNum = '';
+var numChange;
 var input = " ";
 
 if (input.length >= 14) {
@@ -19,8 +20,7 @@ $('body').on('click', '.button', function(){
 
      else if (!isNaN(this.value)) {
         input += this.value;
-        lastNum += this.value;
-        lastNum = lastNum.replace(/[*/%+-]/, '');
+        lastNum = this.value;
         $('#value').html(input);
         
     } else {
@@ -50,9 +50,14 @@ $('body').on('click', '.button', function(){
             $('#value').html(input);
         }
         else if (this.value === "+/-" && !isNaN(lastNum)) {
-            var numChange = (-lastNum);
+            if (Math.sign(lastNum) > 0) {
+                numChange = lastNum * -1;
+            } else {
+                numChange = Math.abs(lastNum);
+            }
             //vicki wuz here
             input = input.toString().replace(lastNum, numChange);
+            lastNum = numChange;
             $('#value').html(input);
         
         } else if (this.value === "%" && !isNaN(lastNum)) {
@@ -60,7 +65,8 @@ $('body').on('click', '.button', function(){
             if (percent.toString().length > 14) {
                 percent = percent.toString().slice(0, 14);
             }
-            input = input.replace(lastNum, percent);
+            input = input.toString().replace(lastNum, percent);
+            lastNum = percent;
             $('#value').html(input);
         
 
