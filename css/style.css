@@ -1,82 +1,63 @@
 body {
-	font: Arial, Helvetica, sans-serif;
+	font-family: 'Roboto', sans-serif;
 	background-color: #dbdbdb;
 }
 
-.well {
-	margin-bottom: 0px;
-	border-radius: 0px;
+h1 {
+	font-family: 'Barrio';
 }
 
-#footer {
-   position:absolute;
-   bottom:0;
-   width:100%;
-}
-
-img {
-	z-index: 10000;
-}
-
-.img-thumbnail {
-	border-radius: 50%;
-}
+/* Width and Height of #skeleton meant to mimic iPhone 5/5s resolution. Divided by 2 */
 
 #skeleton {
 	margin-top: 20px;
+	width: 180pt;
+	height: 284pt;
+	padding: 0;
 }
 
-input {
-	outline: none;
-	margin-bottom: 20px;
+#valueHolder {
+	background-color: black;
+	color: white;
+	width: inherit;
+	height: 59pt;
 }
 
-input[type=search] {
-	-webkit-appearance: textfield;
-	-webkit-box-sizing: content-box;
-	font-family: inherit;
-	font-size: 100%;
+.col-xs-3 {
+	width: 45pt;
+	height: 45pt;
+	padding: 0;
 }
 
-input::-webkit-search-decoration,
-input::-webkit-search-cancel-button {
-	display: none; 
+.col-xs-6 {
+	width: 90pt;
+	height: 45pt;
+	padding: 0;
 }
 
-input[type=search] {
-	background: #ededed url(http://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat 9px center;
-	border: solid 1px #ccc;
-	padding: 9px 10px 9px 32px;
-	width: 55px;
-	
-	-webkit-border-radius: 10em;
-	-moz-border-radius: 10em;
-	border-radius: 10em;
-	
-	-webkit-transition: all .5s;
-	-moz-transition: all .5s;
-	transition: all .5s;
+
+p {
+	padding: 0;
 }
 
-input[type=search]:focus {
-	width: 130px;
-	background-color: #fff;
-	border-color: #66CC75;
-	
-	-webkit-box-shadow: 0 0 5px rgba(109,207,246,.5);
-	-moz-box-shadow: 0 0 5px rgba(109,207,246,.5);
-	box-shadow: 0 0 5px rgba(109,207,246,.5);
+h3 {
+	margin-top: 25px;
 }
 
-input:-moz-placeholder {
-	color: #999;
+#orange {
+	background-color: #e7914b;
+	color: white;
 }
 
-input::-webkit-input-placeholder {
-	color: #999;
+#top {
+	background-color: #c7c7c7;
 }
 
-#howto {
-	margin-top: 20px;
+.button {
+	border-style: solid;
+	border-color: #999999;
+	border-width: 1px;
+	background-color: #d9d9d9;
+	cursor: default;
 }
 
