@@ -1,82 +1,134 @@
-var answer, lastNum = '';
-var numChange, percent;
-var input = " ";
+let countdown = 25;
+let breaktime = 5;
+let timer = 25 + ':00';
+let pause = null;
+let counting;
+let seconds = '00';
+let minutes = null;
 
-if (input.length >= 14) {
-    $('#value').html('ERR: length');
-}
+$(document).ready(function() {
+  $('#timer').html(timer);
+})
 
-$('body').on('click', '.button', function(){
-    if (this.value === 'C') {
-        input = " ";
-        lastNum = '';
-        $('#value').html('0');
-        console.log('cleared');
-    } 
+$('body').on('click', '.breakminus', function() {
+  if (breaktime > 1) {
+    breaktime--;
+    $('#break').html(breaktime);
+    if ($('#title').text() === 'Session') {
+      return;
+    } else {
+      minutes = breaktime;
+      if (seconds == 0) {
+        seconds = "00";
+      }
+      $('#timer').html(breaktime + ":" + seconds);
+    }
+  }
+})
 
-    else if (input.length > 14) {
-        $('#value').html("ERR: Length. Click 'C'");
+$('body').on('click', '.breakplus', function() {
+  breaktime++;
+  $('#break').html(breaktime);
+  if ($('#title').text() === 'Session') {
+    return;
+  } else {
+    minutes = breaktime;
+    if (seconds == 0) {
+      seconds = "00";
+    }
+    $('#timer').html(breaktime + ":" + seconds);
+  }
+})
+
+$('body').on('click', '.sessionminus', function() {
+  if (countdown > 1) {
+    countdown--;
+    $('#session').html(countdown);
+    if ($('#title').text() === 'Session') {
+      $('#timer').html(countdown + ":" + seconds);
+
+      if (minutes !== null) {
+        minutes = countdown;
+      }
+
+    } else {
+      return;
+    }
+  }
+})
+
+$('body').on('click', '.sessionplus', function() {
+  countdown++;
+  $('#session').html(countdown);
+  if ($('#title').text() === 'Session') {
+    $('#timer').html(countdown + ":" + seconds);
+
+    if (minutes !== null) {
+      minutes = countdown;
     }
 
-     else if (!isNaN(this.value)) {
-        input += this.value;
-        lastNum = lastNum.toString().replace(/[*/+-]/, '');
-        lastNum += this.value;
-        $('#value').html(input);
-        
-    } else {
+  } else {
+    return;
+  }
+})
 
-        if (this.value === '=' && !isNaN(lastNum)) {
-            answer = eval(input);
-            if (answer.toString().length > 14) {
-                answer = answer.toString().slice(0, 14);
-                $('#value').html(answer);
-            } else {
-                $('#value').html(answer);
-            }
-            console.log(input + this.value + answer);
-            input = answer;
-            lastNum = answer;
-        }
+$('body').on('click', '.clock', function() {
+  if (pause) {
+    counting = setInterval(counter, 1000);
+    pause = false;
+  } else {
+    clearInterval(counting);
+    pause = true;
+  }
+})
 
-        else if (isNaN(this.value) && this.value !== '%' && this.value !== '.' && this.value !== "+/-" && !isNaN(lastNum) && input !== " ") {
-            input += ' ' + this.value +  ' ';
-            lastNum = lastNum.toString().replace(/[*/+-]/, '');
-            lastNum = this.value;
-            $('#value').html(input);
-        }
+$('body').on('click', '.reset', function() {
+  seconds = 0;
+  if (!pause) {
+    clearInterval(counting);
+    pause = true;
+  }
+  $('#timer').html(minutes + ":0" + seconds);
+})
 
-        else if (this.value === '.' && lastNum.indexOf(this.value) === -1) {
-            if (input === " ") {
-                input += 0;
-            }
-            input += this.value;
-            lastNum += this.value;
-            $('#value').html(input);
-        }
-        else if (this.value === "+/-" && !isNaN(lastNum) && input !== " ") {
-            if (Math.sign(lastNum) > 0) {
-                numChange = lastNum * -1;
-            } else {
-                numChange = Math.abs(lastNum);
-            }
-            //vicki wuz here
-            input = input.toString().replace(lastNum, numChange);
-            lastNum = numChange;
-            $('#value').html(input);
-        
-        } else if (this.value === "%" && !isNaN(lastNum) && input !== " ") {
-            percent = lastNum / Math.pow(10, 2);
-            if (percent.toString().length > 14) {
-                percent = percent.toString().slice(0, 14);
-            }
-            input = input.toString().replace(lastNum, percent);
-            lastNum = percent;
-            $('#value').html(input);
+counter = () => {
+  if (minutes === 0 && seconds === 0) {
 
-        } else {
-            $('#value').html("ERR: Other. Click 'C'");
-            console.log("other error");
-        }
-    }    
-});
+    if ($('#title').text() === 'Session') {
+      alert("Time's up! Go to break.");
+      $('#title').html("Break");
+      minutes = breaktime;
+      seconds = 60;
+      $('#timer').html(minutes + ':00');
+
+    } else if ($('#title').text() === 'Break') {
+      alert("Time's up! Get back to work.");
+      $('#title').html("Session");
+      minutes = countdown;
+      seconds = 60;
+      $('#timer').html(minutes + ':00');
+    }
+
+  } else {
+
+    if (minutes == null) {
+      minutes = countdown;
+      minutes--;
+      seconds = 59;
+      $('#timer').html(minutes + ':' + seconds);
+
+    } else if (seconds > 10 && seconds !== 60) {
+      seconds--;
+      $('#timer').html(minutes + ':' + seconds);
+
+    } else if (seconds <= 10 && seconds !== 0) {
+      seconds--;
+      $('#timer').html(minutes + ':0' + seconds);
+
+    } else if (seconds === 0 || seconds === 60) {
+      minutes--;
+      seconds = 59;
+      $('#timer').html(minutes + ':' + seconds);
+    }
+  }
+}

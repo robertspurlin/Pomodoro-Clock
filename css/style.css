@@ -1,63 +1,63 @@
+.uppercase {
+  text-transform: uppercase;
+}
+
 body {
-	font-family: 'Roboto', sans-serif;
-	background-color: #dbdbdb;
+  font-family: "Source Sans Pro", sans-serif;
+  background-color: #cccccc;
 }
 
-h1 {
-	font-family: 'Barrio';
+.flexcenter {
+  display: flex;
+  align-items: center;
 }
 
-/* Width and Height of #skeleton meant to mimic iPhone 5/5s resolution. Divided by 2 */
-
-#skeleton {
-	margin-top: 20px;
-	width: 180pt;
-	height: 284pt;
-	padding: 0;
+.pt5 {
+  padding-top: 5rem;
 }
 
-#valueHolder {
-	background-color: black;
-	color: white;
-	width: inherit;
-	height: 59pt;
+.pb5 {
+  padding-bottom: 5rem;
 }
 
-.col-xs-3 {
-	width: 45pt;
-	height: 45pt;
-	padding: 0;
-}
-
-.col-xs-6 {
-	width: 90pt;
-	height: 45pt;
-	padding: 0;
-}
-
-
-p {
-	padding: 0;
-}
-
-h3 {
-	margin-top: 25px;
-}
-
-#orange {
-	background-color: #e7914b;
-	color: white;
-}
-
-#top {
-	background-color: #c7c7c7;
+.pt2 {
+  padding-top: 2rem;
 }
 
 .button {
-	border-style: solid;
-	border-color: #999999;
-	border-width: 1px;
-	background-color: #d9d9d9;
-	cursor: default;
+  color: black;
+  background-color: transparent;
+  font-size: 15px;
+  border-radius: 30px;
+  padding: 5px 11px;
+  transition: all 0.3s;
+  border: 0;
 }
 
+.button:hover {
+  color: white;
+  background-color: black;
+  text-decoration: none;
+}
+
+.button:active, .button:focus {
+  text-decoration: none;
+}
+
+.clock {
+  height: 300px;
+  width: 300px;
+  margin: 20px auto;
+  border: 2px solid #22262B;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+.reset {
+  transition: all 0.2s;
+}
+
+.reset:hover {
+  color: blue;
+  text-decoration: underline;
+}
