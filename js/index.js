@@ -73,7 +73,7 @@ $('body').on('click', '.sessionplus', function() {
 })
 
 $('body').on('click', '.clock', function() {
-  if (pause) {
+  if (pause || pause === null) {
     counting = setInterval(counter, 1000);
     pause = false;
   } else {
